@@ -1,0 +1,378 @@
+﻿<Window x:Class="UmaWglSongTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UmaWglSongTool"
+        mc:Ignorable="d"
+        Title="馬娘歌曲模擬器" MaxHeight="780" MaxWidth="900">
+
+    <Window.Resources>
+        <!-- DataGridTextColumn 文字居中 -->
+        <Style x:Key="CenterAlignmentStyle" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <!-- DataGridTextColumn 標題居中 -->
+        <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+
+    <StackPanel Name="stackpanel" Orientation="Vertical" >
+        <TabControl>
+            <TabItem Header="① 第一年">
+                <DataGrid x:Name="SongList_1" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40" RowHeight="50" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="已取得" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IsChecked_Click" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="#" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImgPath}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="名稱" IsReadOnly="True" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#CFECEC"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FA8072"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFC0CB"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFF380"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#EE82EE"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="即時効果" IsReadOnly="True" Binding="{Binding Effect}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                        <DataGridTextColumn Header="被動効果" IsReadOnly="True" Binding="{Binding Innate}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="② 第二年 - 前半">
+                <DataGrid x:Name="SongList_2" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40" RowHeight="50" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="已取得" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IsChecked_Click" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="#" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImgPath}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="名稱" IsReadOnly="True" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#CFECEC"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FA8072"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFC0CB"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFF380"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#EE82EE"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="即時効果" IsReadOnly="True" Binding="{Binding Effect}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                        <DataGridTextColumn Header="被動効果" IsReadOnly="True" Binding="{Binding Innate}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="③ 第二年 - 後半">
+                <DataGrid x:Name="SongList_3" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40" RowHeight="50" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="已取得" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IsChecked_Click" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="#" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImgPath}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="名稱" IsReadOnly="True" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#CFECEC"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FA8072"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFC0CB"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFF380"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#EE82EE"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="即時効果" IsReadOnly="True" Binding="{Binding Effect}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                        <DataGridTextColumn Header="被動効果" IsReadOnly="True" Binding="{Binding Innate}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="④ 第三年">
+                <DataGrid x:Name="SongList_4" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40" RowHeight="50" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="已取得" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IsChecked_Click" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="#" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImgPath}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="名稱" IsReadOnly="True" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#CFECEC"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FA8072"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFC0CB"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFF380"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#EE82EE"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="即時効果" IsReadOnly="True" Binding="{Binding Effect}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                        <DataGridTextColumn Header="被動効果" IsReadOnly="True" Binding="{Binding Innate}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="其它(必得)">
+                <DataGrid x:Name="SongList_5" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="40" RowHeight="50" >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="已取得" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IsChecked_Click" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="#" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImgPath}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="名稱" IsReadOnly="True" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#CFECEC"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FA8072"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFC0CB"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFF380"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#EE82EE"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="即時効果" IsReadOnly="True" Binding="{Binding Effect}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                        <DataGridTextColumn Header="被動効果" IsReadOnly="True" Binding="{Binding Innate}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+        <StackPanel Name="stackpane2" Orientation="Horizontal" >
+            <GroupBox Header="各時間所需點數" Width="450">
+                <DataGrid x:Name="TotalList" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="30" RowHeight="30">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="時間" IsReadOnly="True" Binding="{Binding Space}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#CFECEC"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FA8072"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFC0CB"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#FFF380"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                    <Setter Property="Background" Value="#EE82EE"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <GroupBox Header="資訊" Width="430">
+                <StackPanel Name="stackpane3" Orientation="Vertical" >
+                    <Label Name="SongCountLabel" FontSize="20"/>
+                    <Button Content="清除" FontSize="20" Click="Button_Click" Width="310" Height="39" />
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+    </StackPanel>
+
+
+</Window>
