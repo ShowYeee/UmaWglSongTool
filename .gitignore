@@ -4,3 +4,7 @@
 UmaWglSongTool/bin/
 
 UmaWglSongTool/obj/
+
+.vscode/
+
+bin/

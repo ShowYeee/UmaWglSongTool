@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,20 +17,76 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using F23.StringSimilarity;
+using UmaWglSongTool.Utility;
+using System.Threading;
 
 namespace UmaWglSongTool
 {
+
+    [ValueConversion(typeof(int), typeof(String))]
+    public class PriceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int price = (int)value;
+            if (price == 0)
+            {
+                return "-";
+            }
+            return price.ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
     public partial class MainWindow : Window
     {
+
+        private List<ListModel> _Datas = new List<ListModel>();
+        private DispatcherTimer aTimer = new DispatcherTimer();
+        private bool _IsCapture = false;
+        CancellationTokenSource tokenSource = new CancellationTokenSource();
+
         public MainWindow()
         {
             InitializeComponent();
             LoadData();
+
+            #region 初始化組件屬性
+            CaptcureBtn.Content = "擷取視窗";
+            YearSelect.SelectedIndex = 0;
+            #endregion
+      
+            _IsCapture = false;      
+        }
+
+        private void IsChecked_Click(object sender, RoutedEventArgs e)
+        {
+            SetGridDataIsCheck();
+            GridReload();
+        }
+
+        private void YearSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GridReload();
+        }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ClearGridData();
+            GridReload();
         }
 
         private void LoadData()
@@ -35,35 +94,71 @@ namespace UmaWglSongTool
             using (StreamReader r = new StreamReader("assests/SongList.json"))
             {
                 string json = r.ReadToEnd();
-                var source = JsonConvert.DeserializeObject<List<JsonResult>>(json);
-                if(source != null)
+                var source = JsonConvert.DeserializeObject<List<ListModel>>(json);
+                if (source != null)
                 {
-                    SongList_1.ItemsSource = source[0].Datas.Select(item => { item.ImgPath = System.IO.Path.GetFullPath($"assests/songs/{item.Id}.jpg"); return item; }).ToList<ListModel>();
-                    SongList_2.ItemsSource = source[1].Datas.Select(item => { item.ImgPath = System.IO.Path.GetFullPath($"assests/songs/{item.Id}.jpg"); return item; }).ToList<ListModel>();
-                    SongList_3.ItemsSource = source[2].Datas.Select(item => { item.ImgPath = System.IO.Path.GetFullPath($"assests/songs/{item.Id}.jpg"); return item; }).ToList<ListModel>();
-                    SongList_4.ItemsSource = source[3].Datas.Select(item => { item.ImgPath = System.IO.Path.GetFullPath($"assests/songs/{item.Id}.jpg"); return item; }).ToList<ListModel>();
-                    SongList_5.ItemsSource = source[4].Datas.Select(item => { item.ImgPath = System.IO.Path.GetFullPath($"assests/songs/{item.Id}.jpg"); return item; }).ToList<ListModel>();
+                    _Datas = source;
+                    // 轉換成 Path
+                    _Datas.Select(item => { item.ImgPath = System.IO.Path.GetFullPath($"assests/image/songs/{item.Id}.jpg"); return item; }).ToList<ListModel>();
                 }
-
-                ComputeTotal();
             }
         }
 
-        private void IsChecked_Click(object sender, RoutedEventArgs e)
+        private void GridReload()
         {
-            ComputeTotal();
+            Action action = () =>
+            {
+                var datas = GetYearOfData(YearSelect.SelectedIndex);
+                SongList.ItemsSource = null;
+                SongList.ItemsSource = datas;
+                ComputeTotal();
+            };
+            YearSelect.Dispatcher.BeginInvoke(action);
+        }
+
+        private void SetGridDataIsCheck()
+        {
+            var TableData = SongList.ItemsSource as IEnumerable<ListModel>;
+            if (TableData != null)
+            {
+                foreach (var item in TableData)
+                {
+                    _Datas.SingleOrDefault(x => x.Id == item.Id).IsChecked = item.IsChecked;
+                }
+            }
+        }
+
+        private List<ListModel> GetYearOfData(int index)
+        {
+            var datas = new List<ListModel>();
+            var TableData = SongList.ItemsSource as IEnumerable<ListModel>;
+
+            if (index > 0)
+            {
+                datas = _Datas.Where(x => x.Year == index).ToList<ListModel>();
+            }
+            else
+            {
+                datas = _Datas;
+            }
+            return datas;
+        }
+
+        private void ClearGridData()
+        {
+            _Datas = _Datas.Select(item => { item.IsChecked = false; return item; }).ToList<ListModel>();
         }
 
         private void ComputeTotal()
         {
-            var dataSource_1 = SongList_1.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_2 = SongList_2.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_3 = SongList_3.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_4 = SongList_4.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_5 = SongList_5.ItemsSource as IEnumerable<ListModel>;
-
-            #region 所需點數計算
             var totalList = new List<ResultModel>();
+
+            var TableData = SongList.ItemsSource as IEnumerable<ListModel>;
+            var dataSource_1 = TableData.Where(x => x.Year == 1);
+            var dataSource_2 = TableData.Where(x => x.Year == 2);
+            var dataSource_3 = TableData.Where(x => x.Year == 3);
+            var dataSource_4 = TableData.Where(x => x.Year == 4);
+            var dataSource_5 = TableData.Where(x => x.Year == 5);
 
             var unCheckedRows_1 = dataSource_1.Where(item => item.IsChecked == false);
             totalList.Add(new ResultModel
@@ -75,7 +170,7 @@ namespace UmaWglSongTool
                 Vi = unCheckedRows_1.Sum(x => x.Vi),
                 Me = unCheckedRows_1.Sum(x => x.Me),
             });
-          
+
             var unCheckedRows_2 = dataSource_2.Where(item => item.IsChecked == false);
             totalList.Add(new ResultModel
             {
@@ -86,7 +181,7 @@ namespace UmaWglSongTool
                 Vi = unCheckedRows_2.Sum(x => x.Vi),
                 Me = unCheckedRows_2.Sum(x => x.Me),
             });
- 
+
             var unCheckedRows_3 = dataSource_3.Where(item => item.IsChecked == false);
             totalList.Add(new ResultModel
             {
@@ -98,7 +193,7 @@ namespace UmaWglSongTool
                 Me = unCheckedRows_3.Sum(x => x.Me),
             });
 
-    
+
             var unCheckedRows_4 = dataSource_4.Where(item => item.IsChecked == false);
             totalList.Add(new ResultModel
             {
@@ -141,67 +236,65 @@ namespace UmaWglSongTool
             });
 
             TotalList.ItemsSource = totalList;
-            #endregion
-
-            #region 其他計算
-            int count_1 = dataSource_1.Where(item => item.IsChecked == true).Count();
-            int count_2 = dataSource_2.Where(item => item.IsChecked == true).Count();
-            int count_3 = dataSource_3.Where(item => item.IsChecked == true).Count();
-            int count_4 = dataSource_4.Where(item => item.IsChecked == true).Count();
-            int count_5 = dataSource_5.Where(item => item.IsChecked == true).Count();
-            int songCount = count_1 + count_2 + count_3 + count_4 + count_5;
-            SongCountLabel.Content = $"所持歌曲數: {songCount}";
-            #endregion
-
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CaptcureBtn_Click(object sender, RoutedEventArgs e)
+        {       
+
+            if (_IsCapture)
+            {
+                _IsCapture = false;
+                tokenSource?.Cancel();
+                CaptcureBtn.Content = "擷取視窗";
+            }
+            else
+            {
+                _IsCapture = true;
+                tokenSource = new CancellationTokenSource();
+                Task.Run(AutoCapture, tokenSource.Token);
+            }
+        }
+
+        private void AutoCapture()
         {
-            var dataSource_1 = SongList_1.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_2 = SongList_2.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_3 = SongList_3.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_4 = SongList_4.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_5 = SongList_5.ItemsSource as IEnumerable<ListModel>;
+            int num = 0;
+            string pName = string.Empty;
 
-            SongList_1.ItemsSource = dataSource_1.Select(item => { item.IsChecked = false; return item; }).ToList<ListModel>();
-            SongList_2.ItemsSource = dataSource_2.Select(item => { item.IsChecked = false; return item; }).ToList<ListModel>();
-            SongList_3.ItemsSource = dataSource_3.Select(item => { item.IsChecked = false; return item; }).ToList<ListModel>();
-            SongList_4.ItemsSource = dataSource_4.Select(item => { item.IsChecked = false; return item; }).ToList<ListModel>();
-            SongList_5.ItemsSource = dataSource_5.Select(item => { item.IsChecked = false; return item; }).ToList<ListModel>();
+            Action actionP = () => { pName = ProcessNameText.Text; };
+            ProcessNameText.Dispatcher.BeginInvoke(actionP);
 
-            ComputeTotal();
+            while (!tokenSource.IsCancellationRequested)
+            {
+                try
+                {
+                    string fileName = "Capture.jpg";
+                    CaptureHelper capture = new CaptureHelper();
+                    OcrHelper ocr = new OcrHelper();
+                    capture.GetWindowCaptureByName(pName, fileName);
+                    string str = ocr.GetTextByImage(fileName);
 
+                    var jw = new JaroWinkler();
+                    var item = _Datas.SingleOrDefault(x => jw.Similarity(str, $"「{x.Name}」の楽曲\nを習得") >= 0.7);
+                    if (item != null)
+                    {
+                        _Datas.SingleOrDefault(x => x.Id == item.Id).IsChecked = true;
+                        GridReload();
+                    }
+                    num++;
+
+                    Action action = () => { CaptcureBtn.Content = $"擷取視窗 (scan: {num})"; };
+                    CaptcureBtn.Dispatcher.BeginInvoke(action);
+
+                    Thread.Sleep(1000);
+                }
+                catch(Exception e)
+                {
+                    _IsCapture = false;
+                    tokenSource?.Cancel();
+                    Action action = () => { CaptcureBtn.Content = "擷取錯誤!"; };
+                    CaptcureBtn.Dispatcher.BeginInvoke(action);
+                }               
+            }
         }
-    }
-
-    public class ListModel
-    {
-        public int Id { get; set; }
-        public bool IsChecked { get; set; }
-        public string? Name { get; set; }
-        public int Da { get; set; }
-        public int Pa { get; set; }
-        public int Vo { get; set; }
-        public int Vi { get; set; }
-        public int Me { get; set; }
-        public string? Effect { get; set; }
-        public string? Innate { get; set; }
-        public string? ImgPath { get; set; }
-    }
-
-    public class JsonResult
-    {
-        public int Space { get; set; }
-        public List<ListModel> Datas { get; set; }
-    }
-
-    public class ResultModel
-    {
-        public string? Space { get; set; }
-        public int Da { get; set; }
-        public int Pa { get; set; }
-        public int Vo { get; set; }
-        public int Vi { get; set; }
-        public int Me { get; set; }
     }
 }
