@@ -20,6 +20,7 @@ namespace UmaWglSongTool
         public string? Now_D { get; set; }
         public string? ImgPath { get; set; }
         public int Year { get; set; }
+        public LiveInfoModel LiveInfo { get; set; }
     }
 
     public class JsonResult
@@ -44,5 +45,12 @@ namespace UmaWglSongTool
         public int Top { get; set; }
         public int Right { get; set; }
         public int Bottom { get; set; }
+    }
+
+    public class LiveInfoModel
+    {
+        public int Card { get; set; }
+        public int GoodAt { get; set; }
+        public int Friendship { get; set; }
     }
 }

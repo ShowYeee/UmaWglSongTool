@@ -39,7 +39,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="performance_Da.png" />
+	  <None Remove="performance_Me.png" />
+	  <None Remove="performance_Pa.png" />
+	  <None Remove="performance_Vi.png" />
+	  <None Remove="performance_Vo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Resource Include="icon.png" />
+	  <Resource Include="performance_Da.png" />
+	  <Resource Include="performance_Me.png" />
+	  <Resource Include="performance_Pa.png" />
+	  <Resource Include="performance_Vi.png" />
+	  <Resource Include="performance_Vo.png" />
 	</ItemGroup>
 
 	<ProjectExtensions>

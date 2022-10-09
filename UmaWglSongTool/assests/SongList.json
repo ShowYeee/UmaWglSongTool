@@ -7,9 +7,14 @@
     "Vo": 0,
     "Vi": 0,
     "Me": 21,
-    "Now_D": "トレ賢さ + 1",
+    "Now_D": "トレ賢 + 1",
     "Live_D": "得意率 + 5",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 5,
+      "Friendship": 0
+    }
   },
   {
     "id": 1,
@@ -21,7 +26,12 @@
     "Me": 0,
     "Now_D": "トレスピ + 1",
     "Live_D": "サポカイベ + 1",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 1,
+      "GoodAt": 0,
+      "Friendship": 0
+    }
   },
   {
     "id": 2,
@@ -33,7 +43,12 @@
     "Me": 0,
     "Now_D": "トレ根性 + 1",
     "Live_D": "サポカイベ + 1",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 1,
+      "GoodAt": 0,
+      "Friendship": 0
+    }
   },
   {
     "id": 3,
@@ -45,7 +60,12 @@
     "Me": 21,
     "Now_D": "トレパワ + 1",
     "Live_D": "サポカイベ + 1",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 1,
+      "GoodAt": 0,
+      "Friendship": 0
+    }
   },
   {
     "id": 4,
@@ -57,7 +77,12 @@
     "Me": 0,
     "Now_D": "トレスタ + 1",
     "Live_D": "サポカイベ + 1",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 1,
+      "GoodAt": 0,
+      "Friendship": 0
+    }
   },
   {
     "id": 5,
@@ -69,7 +94,12 @@
     "Me": 21,
     "Now_D": "パワ + 22",
     "Live_D": "友情 + 5%",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 5
+    }
   },
   {
     "id": 6,
@@ -81,7 +111,12 @@
     "Me": 14,
     "Now_D": "SP + 22",
     "Live_D": "友情＋5%",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 5
+    }
   },
   {
     "id": 7,
@@ -93,7 +128,12 @@
     "Me": 0,
     "Now_D": "スピ + 22",
     "Live_D": "友情 + 5%",
-    "Year": 1
+    "Year": 1,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 5
+    }
   },
   {
     "id": 8,
@@ -105,7 +145,12 @@
     "Me": 0,
     "Now_D": "トレSP + 2",
     "Live_D": "得意率 + 5",
-    "Year": 2
+    "Year": 2,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 5,
+      "Friendship": 0
+    }
   },
   {
     "id": 9,
@@ -117,7 +162,12 @@
     "Me": 0,
     "Now_D": "トレ根性 + 2",
     "Live_D": "得意率 + 5",
-    "Year": 2
+    "Year": 2,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 5,
+      "Friendship": 0
+    }
   },
   {
     "id": 10,
@@ -129,7 +179,12 @@
     "Me": 0,
     "Now_D": "トレスピ + 2",
     "Live_D": "得意率 + 5",
-    "Year": 2
+    "Year": 2,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 5,
+      "Friendship": 0
+    }
   },
   {
     "id": 11,
@@ -139,9 +194,14 @@
     "Vo": 21,
     "Vi": 0,
     "Me": 21,
-    "Now_D": "トレSP＋３",
-    "Live_D": "サポカイベ＋１",
-    "Year": 3
+    "Now_D": "トレSP + 3",
+    "Live_D": "サポカイベ + 1",
+    "Year": 3,
+    "LiveInfo": {
+      "Card": 1,
+      "GoodAt": 0,
+      "Friendship": 0
+    }
   },
   {
     "id": 12,
@@ -151,9 +211,14 @@
     "Vo": 0,
     "Vi": 0,
     "Me": 21,
-    "Now_D": "トレ賢さ＋２",
-    "Live_D": "サポカイベ＋１",
-    "Year": 3
+    "Now_D": "トレ賢さ + 2",
+    "Live_D": "サポカイベ + 1",
+    "Year": 3,
+    "LiveInfo": {
+      "Card": 1,
+      "GoodAt": 0,
+      "Friendship": 0
+    }
   },
   {
     "id": 13,
@@ -164,8 +229,13 @@
     "Vi": 0,
     "Me": 0,
     "Now_D": "トレスピ + 2",
-    "Live_D": "得意率＋５",
-    "Year": 3
+    "Live_D": "得意率 + 5",
+    "Year": 3,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 5,
+      "Friendship": 0
+    }
   },
   {
     "id": 14,
@@ -175,9 +245,14 @@
     "Vo": 21,
     "Vi": 0,
     "Me": 42,
-    "Now_D": "トレパワ＋２",
-    "Live_D": "得意率＋５",
-    "Year": 3
+    "Now_D": "トレパワ + 2",
+    "Live_D": "得意率 + 5",
+    "Year": 3,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 5,
+      "Friendship": 0
+    }
   },
   {
     "id": 15,
@@ -187,9 +262,14 @@
     "Vo": 0,
     "Vi": 0,
     "Me": 22,
-    "Now_D": "賢さ＋２２",
-    "Live_D": "友情＋５％",
-    "Year": 4
+    "Now_D": "賢さ + 22",
+    "Live_D": "友情 + 5%",
+    "Year": 4,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 5
+    }
   },
   {
     "id": 16,
@@ -200,8 +280,13 @@
     "Vi": 0,
     "Me": 22,
     "Now_D": "パワ＋２２",
-    "Live_D": "友情＋５％",
-    "Year": 4
+    "Live_D": "友情 + 5%",
+    "Year": 4,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 5
+    }
   },
   {
     "id": 17,
@@ -212,8 +297,13 @@
     "Vi": 26,
     "Me": 0,
     "Now_D": "スピ＋２６",
-    "Live_D": "友情＋１０％",
-    "Year": 4
+    "Live_D": "友情 + 10%",
+    "Year": 4,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 10
+    }
   },
   {
     "id": 18,
@@ -223,9 +313,14 @@
     "Vo": 12,
     "Vi": 0,
     "Me": 0,
-    "Now_D": "スタ＋２２",
-    "Live_D": "友情＋５％",
-    "Year": 4
+    "Now_D": "スタ + 22",
+    "Live_D": "友情 + 5%",
+    "Year": 4,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 5
+    }
   },
   {
     "id": 19,
@@ -235,9 +330,14 @@
     "Vo": 0,
     "Vi": 32,
     "Me": 0,
-    "Now_D": "根性＋２２",
-    "Live_D": "友情＋５％",
-    "Year": 4
+    "Now_D": "根性 + 22",
+    "Live_D": "友情 + 5%",
+    "Year": 4,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 5
+    }
   },
   {
     "id": 20,
@@ -247,9 +347,14 @@
     "Vo": 0,
     "Vi": 42,
     "Me": 0,
-    "Now_D": "根性＋２６",
-    "Live_D": "友情＋１０％",
-    "Year": 4
+    "Now_D": "根性 + 26",
+    "Live_D": "友情 + 10%",
+    "Year": 4,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 10
+    }
   },
   {
     "id": 21,
@@ -259,9 +364,14 @@
     "Vo": 0,
     "Vi": 0,
     "Me": 0,
-    "Now_D": "すべてのパフォーマンス + 10",
+    "Now_D": "パフォーマンス + 10",
     "Live_D": "得意率アップ + 5",
-    "Year": 5
+    "Year": 5,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 5,
+      "Friendship": 0
+    }
   },
   {
     "id": 22,
@@ -271,8 +381,13 @@
     "Vo": 0,
     "Vi": 0,
     "Me": 0,
-    "Now_D": "すべての基礎能力 + 10",
+    "Now_D": "基礎能力 + 10",
     "Live_D": "友情 + 10%",
-    "Year": 5
+    "Year": 5,
+    "LiveInfo": {
+      "Card": 0,
+      "GoodAt": 0,
+      "Friendship": 10
+    }
   }
 ]

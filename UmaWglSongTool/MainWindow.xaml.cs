@@ -151,14 +151,14 @@ namespace UmaWglSongTool
 
         private void ComputeTotal()
         {
+            #region Performance 所需
             var totalList = new List<ResultModel>();
 
-            var TableData = SongList.ItemsSource as IEnumerable<ListModel>;
-            var dataSource_1 = TableData.Where(x => x.Year == 1);
-            var dataSource_2 = TableData.Where(x => x.Year == 2);
-            var dataSource_3 = TableData.Where(x => x.Year == 3);
-            var dataSource_4 = TableData.Where(x => x.Year == 4);
-            var dataSource_5 = TableData.Where(x => x.Year == 5);
+            var dataSource_1 = _Datas.Where(x => x.Year == 1);
+            var dataSource_2 = _Datas.Where(x => x.Year == 2);
+            var dataSource_3 = _Datas.Where(x => x.Year == 3);
+            var dataSource_4 = _Datas.Where(x => x.Year == 4);
+            var dataSource_5 = _Datas.Where(x => x.Year == 5);
 
             var unCheckedRows_1 = dataSource_1.Where(item => item.IsChecked == false);
             totalList.Add(new ResultModel
@@ -192,7 +192,6 @@ namespace UmaWglSongTool
                 Vi = unCheckedRows_3.Sum(x => x.Vi),
                 Me = unCheckedRows_3.Sum(x => x.Me),
             });
-
 
             var unCheckedRows_4 = dataSource_4.Where(item => item.IsChecked == false);
             totalList.Add(new ResultModel
@@ -236,11 +235,17 @@ namespace UmaWglSongTool
             });
 
             TotalList.ItemsSource = totalList;
+            #endregion
+
+
+            SongsCountText.Content = _Datas.Where(x => x.IsChecked == true).Count();
+            CardText.Content = _Datas.Where(x => x.IsChecked == true).Sum(x => x.LiveInfo.Card);
+            GoodAtText.Content = $"{_Datas.Where(x => x.IsChecked == true).Sum(x => x.LiveInfo.GoodAt)} %";
+            FriendshipText.Content = $"{_Datas.Where(x => x.IsChecked == true).Sum(x => x.LiveInfo.Friendship)} %";
         }
 
         private void CaptcureBtn_Click(object sender, RoutedEventArgs e)
         {       
-
             if (_IsCapture)
             {
                 _IsCapture = false;
@@ -253,6 +258,8 @@ namespace UmaWglSongTool
                 tokenSource = new CancellationTokenSource();
                 Task.Run(AutoCapture, tokenSource.Token);
             }
+
+            ProcessNameText.IsEnabled = !_IsCapture;
         }
 
         private void AutoCapture()
@@ -271,10 +278,10 @@ namespace UmaWglSongTool
                     CaptureHelper capture = new CaptureHelper();
                     OcrHelper ocr = new OcrHelper();
                     capture.GetWindowCaptureByName(pName, fileName);
-                    string str = ocr.GetTextByImage(fileName);
+                    string str = ocr.GetTextByImage(fileName).Replace("\n", "");
 
                     var jw = new JaroWinkler();
-                    var item = _Datas.SingleOrDefault(x => jw.Similarity(str, $"「{x.Name}」の楽曲\nを習得") >= 0.7);
+                    var item = _Datas.Where(x => jw.Similarity(str, $"「{x.Name}」の楽曲を習得の期待度が上がった") >= 0.7).FirstOrDefault();
                     if (item != null)
                     {
                         _Datas.SingleOrDefault(x => x.Id == item.Id).IsChecked = true;
@@ -285,13 +292,16 @@ namespace UmaWglSongTool
                     Action action = () => { CaptcureBtn.Content = $"擷取視窗 (scan: {num})"; };
                     CaptcureBtn.Dispatcher.BeginInvoke(action);
 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
                 catch(Exception e)
                 {
                     _IsCapture = false;
                     tokenSource?.Cancel();
-                    Action action = () => { CaptcureBtn.Content = "擷取錯誤!"; };
+                    Action action = () => { 
+                        CaptcureBtn.Content = "擷取錯誤!";
+                        ProcessNameText.IsEnabled = !_IsCapture;
+                    };
                     CaptcureBtn.Dispatcher.BeginInvoke(action);
                 }               
             }

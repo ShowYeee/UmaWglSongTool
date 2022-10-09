@@ -31,7 +31,7 @@ namespace UmaWglSongTool.Utility
         private Bitmap GetWindowCapture(Rect rect)
         {
             int Width = rect.Right - rect.Left;
-            int Height = Convert.ToInt32((rect.Bottom - rect.Top) * 0.09);
+            int Height = Convert.ToInt32((rect.Bottom - rect.Top) * 0.12);
             int X = rect.Left;
             int Y = rect.Top + Convert.ToInt32((rect.Bottom - rect.Top) * 0.73); ;
 

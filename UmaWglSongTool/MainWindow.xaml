@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:UmaWglSongTool"
         mc:Ignorable="d"
         Title="馬娘 WGL 歌曲工具"
-        Icon="icon.png">
+        Icon="icon.png"
+        Height="700"
+        Width="1250">
 
     <Window.Resources>
         <!-- DataGridTextColumn 文字居中 -->
@@ -25,22 +27,21 @@
     </Window.Resources>
 
     <Grid>
-
         <!--Definition-->
         <Grid.RowDefinitions >
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions >
             <ColumnDefinition />
             <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" x:Name="SongList" AutoGenerateColumns="False" CanUserAddRows="False"  ColumnHeaderHeight="40" RowHeight="50" Margin="10">
+        <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" x:Name="SongList" AutoGenerateColumns="False" CanUserAddRows="False"  ColumnHeaderHeight="40" RowHeight="40" Margin="10">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="已取得" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                <DataGridTemplateColumn Header="已取得" Width="auto" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="IsChecked_Click" />
@@ -54,9 +55,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="名稱" IsReadOnly="True" Binding="{Binding Name}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                <DataGridTextColumn Header="名稱" IsReadOnly="True" Binding="{Binding Name}" Width="auto" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Image Source="/performance_Da.png"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                             <Setter Property="Background" Value="#c1fafe"/>
@@ -64,6 +70,11 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Image Source="assests/image/Performance/performance_Pa.png"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                             <Setter Property="Background" Value="#eec7c6"/>
@@ -71,6 +82,11 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Image Source="assests/image/Performance/performance_Vo.png"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                             <Setter Property="Background" Value="#fef0c9"/>
@@ -78,6 +94,11 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Image Source="assests/image/Performance/performance_Vi.png"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                             <Setter Property="Background" Value="#FFF380"/>
@@ -85,6 +106,11 @@
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                    <DataGridTextColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <Image Source="assests/image/Performance/performance_Me.png"/>
+                        </DataTemplate>
+                    </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                             <Setter Property="Background" Value="#d2cde4"/>
@@ -95,9 +121,9 @@
                 <DataGridTextColumn Header="被動効果" IsReadOnly="True" Binding="{Binding Now_D}" Width="*" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}" />
             </DataGrid.Columns>
         </DataGrid>
+        
         <GroupBox Grid.Row="0" Grid.Column="1" Header="清單選項"  Margin="5" Padding="10">
             <StackPanel>
-                
                 <ComboBox Name="YearSelect" SelectionChanged="YearSelect_SelectionChanged">
                     <ComboBoxItem>全部</ComboBoxItem>
                     <ComboBoxItem>第一年</ComboBoxItem>
@@ -107,22 +133,43 @@
                     <ComboBoxItem>支援卡 or 事件</ComboBoxItem>
                 </ComboBox>
                 <Button x:Name="ClearBtn" Content="清除" Click="ClearBtn_Click" Margin="0,10,0,0" />
-
-                
             </StackPanel>
-
         </GroupBox>
 
         <GroupBox Grid.Row="1" Grid.Column="1" Header="辨識工具"  Margin="5" Padding="10">
             <StackPanel>
-                <TextBox x:Name="ProcessNameText" />
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="軟體名稱" VerticalAlignment="Center"  />
+                    <TextBox x:Name="ProcessNameText" Width="217" Margin="10,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
                 <Button x:Name="CaptcureBtn" Content="擷取視窗" Click="CaptcureBtn_Click" Margin="0,10,0,0" />
             </StackPanel>
-            
         </GroupBox>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="6">
-            <Label Content="Perfroma" />
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="購買資訊" Margin="5" Padding="10">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="所持數："  />
+                    <Label x:Name="SongsCountText" Content="0"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="サポカイベ："  />
+                    <Label x:Name="CardText" Content="0"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="得意率："  />
+                    <Label x:Name="GoodAtText" Content="0"  />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="友情："  />
+                    <Label x:Name="FriendshipText" Content="0"  />
+                </StackPanel>
+
+            </StackPanel>
+        </GroupBox>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="6">
+            <Label Content="Perfromace 所需" />
             <DataGrid x:Name="TotalList" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="30" RowHeight="30">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="時間" IsReadOnly="True" Binding="{Binding Space}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
@@ -166,8 +213,6 @@
             </DataGrid>
         </StackPanel>
 
-        <GroupBox Header="清單搜尋">
-            
-        </GroupBox>
+        
     </Grid>
 </Window>
