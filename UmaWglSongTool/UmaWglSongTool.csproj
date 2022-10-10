@@ -15,7 +15,6 @@
 		<PackageReference Include="OpenCvSharp4" Version="4.6.0.20220608" />
 		<PackageReference Include="OpenCvSharp4.Extensions" Version="4.6.0.20220608" />
 		<PackageReference Include="OpenCvSharp4.runtime.win" Version="4.6.0.20220608" />
-		<PackageReference Include="Spire.OCRfor.NET" Version="1.7.0" />
 		<PackageReference Include="StringSimilarity.Net" Version="1.0.3" />
 		<PackageReference Include="System.Drawing.Common" Version="6.0.0" />
 		<PackageReference Include="Tesseract" Version="4.1.1" />
@@ -35,6 +34,18 @@
 
 	<ItemGroup>
 		<None Include="Utility\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="tmp\**">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="config.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
@@ -62,6 +73,9 @@
 	  <Resource Include="assests\image\Performance\Vo.png">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </Resource>
+	  <Resource Include="config.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -78,7 +92,6 @@
 	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 	  </None>
 	</ItemGroup>
-
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties />

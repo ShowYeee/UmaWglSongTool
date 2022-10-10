@@ -1,0 +1,7 @@
+﻿{
+  "Capture": {
+    "Delay": 500,
+    "Threshold": "0.7",
+    "ProcessName": "Nox"
+  }
+}

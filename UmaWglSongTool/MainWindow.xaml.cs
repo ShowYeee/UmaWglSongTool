@@ -55,8 +55,8 @@ namespace UmaWglSongTool
     {
 
         private List<ListModel> _Datas = new List<ListModel>();
-        private DispatcherTimer aTimer = new DispatcherTimer();
         private bool _IsCapture = false;
+        private ConfigModel _config = new ConfigModel();
         CancellationTokenSource tokenSource = new CancellationTokenSource();
 
         public MainWindow()
@@ -67,11 +67,13 @@ namespace UmaWglSongTool
             #region 初始化組件屬性
             CaptcureBtn.Content = "擷取視窗";
             YearSelect.SelectedIndex = 0;
+            InitConfig();
             #endregion
-      
+
             _IsCapture = false;      
         }
 
+        #region 組件事件
         private void IsChecked_Click(object sender, RoutedEventArgs e)
         {
             SetGridDataIsCheck();
@@ -87,6 +89,25 @@ namespace UmaWglSongTool
         {
             ClearGridData();
             GridReload();
+        }
+
+        #endregion
+
+        #region 函式
+
+        private void InitConfig()
+        {
+            using (StreamReader r = new StreamReader("config.json"))
+            {
+                string json = r.ReadToEnd();
+                var source = JsonConvert.DeserializeObject<ConfigModel>(json);
+                if (source != null)
+                {
+                    _config = source;
+                    ProcessNameText.Text = _config.Capture.ProcessName;
+                }
+
+            }
         }
 
         private void LoadData()
@@ -245,7 +266,7 @@ namespace UmaWglSongTool
         }
 
         private void CaptcureBtn_Click(object sender, RoutedEventArgs e)
-        {       
+        {
             if (_IsCapture)
             {
                 _IsCapture = false;
@@ -272,16 +293,19 @@ namespace UmaWglSongTool
 
             while (!tokenSource.IsCancellationRequested)
             {
+                double threshold = _config.Capture.Threshold;
+                int delay = _config.Capture.Delay;
+
                 try
                 {
-                    string fileName = "Capture.jpg";
+                    string fileName = "tmp/Capture.jpg";
                     CaptureHelper capture = new CaptureHelper();
                     OcrHelper ocr = new OcrHelper();
                     capture.GetWindowCaptureByName(pName, fileName);
                     string str = ocr.GetTextByImage(fileName).Replace("\n", "");
 
                     var jw = new JaroWinkler();
-                    var item = _Datas.Where(x => jw.Similarity(str, $"「{x.Name}」の楽曲を習得の期待度が上がった") >= 0.7).FirstOrDefault();
+                    var item = _Datas.Where(x => jw.Similarity(str, $"「{x.Name}」の楽曲を習得の期待度が上がった") >= threshold).FirstOrDefault();
                     if (item != null)
                     {
                         _Datas.SingleOrDefault(x => x.Id == item.Id).IsChecked = true;
@@ -292,19 +316,21 @@ namespace UmaWglSongTool
                     Action action = () => { CaptcureBtn.Content = $"擷取視窗 (scan: {num})"; };
                     CaptcureBtn.Dispatcher.BeginInvoke(action);
 
-                    Thread.Sleep(500);
+                    Thread.Sleep(delay);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     _IsCapture = false;
                     tokenSource?.Cancel();
-                    Action action = () => { 
+                    Action action = () => {
                         CaptcureBtn.Content = "擷取錯誤!";
                         ProcessNameText.IsEnabled = !_IsCapture;
                     };
                     CaptcureBtn.Dispatcher.BeginInvoke(action);
-                }               
+                }
             }
         }
+
+        #endregion
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace UmaWglSongTool
@@ -52,5 +53,17 @@ namespace UmaWglSongTool
         public int Card { get; set; }
         public int GoodAt { get; set; }
         public int Friendship { get; set; }
+    }
+
+    public class ConfigModel
+    {
+        public CaptureConfigModel Capture { get; set; }
+    }
+
+    public class CaptureConfigModel
+    {
+        public int Delay { get; set; }
+        public double Threshold { get; set; }
+        public string ProcessName { get; set; }
     }
 }
