@@ -39,20 +39,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="performance_Da.png" />
-	  <None Remove="performance_Me.png" />
-	  <None Remove="performance_Pa.png" />
-	  <None Remove="performance_Vi.png" />
-	  <None Remove="performance_Vo.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Resource Include="icon.png" />
-	  <Resource Include="performance_Da.png" />
-	  <Resource Include="performance_Me.png" />
-	  <Resource Include="performance_Pa.png" />
-	  <Resource Include="performance_Vi.png" />
-	  <Resource Include="performance_Vo.png" />
+	  <Resource Include="assests\image\icon.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="assests\image\Performance\Da.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="assests\image\Performance\Me.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="assests\image\Performance\Pa.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="assests\image\Performance\Vi.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="assests\image\Performance\Vo.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 	<ProjectExtensions>

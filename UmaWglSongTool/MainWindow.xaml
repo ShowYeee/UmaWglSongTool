@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:UmaWglSongTool"
         mc:Ignorable="d"
         Title="馬娘 WGL 歌曲工具"
-        Icon="icon.png"
-        Height="700"
+        Icon="/assests/image/icon.png"
+        Height="742"
         Width="1250">
 
     <Window.Resources>
@@ -39,7 +39,7 @@
             <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" x:Name="SongList" AutoGenerateColumns="False" CanUserAddRows="False"  ColumnHeaderHeight="40" RowHeight="40" Margin="10">
+        <DataGrid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" x:Name="SongList" AutoGenerateColumns="False" CanUserAddRows="False"  ColumnHeaderHeight="40" RowHeight="40" Margin="10" HorizontalGridLinesBrush="#FFCCCCFF" VerticalGridLinesBrush="#FFCCCCFF">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="已取得" Width="auto" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
                     <DataGridTemplateColumn.CellTemplate>
@@ -60,7 +60,7 @@
                 <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Image Source="/performance_Da.png"/>
+                            <Image Source="/assests/image/Performance/Da.png"/>
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
@@ -72,7 +72,7 @@
                 <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Image Source="assests/image/Performance/performance_Pa.png"/>
+                            <Image Source="/assests/image/Performance/Pa.png"/>
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
@@ -84,19 +84,19 @@
                 <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Image Source="assests/image/Performance/performance_Vo.png"/>
+                            <Image Source="/assests/image/Performance/Vo.png"/>
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
-                            <Setter Property="Background" Value="#fef0c9"/>
+                            <Setter Property="Background" Value="#FFE4E1"/>
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Image Source="assests/image/Performance/performance_Vi.png"/>
+                            <Image Source="/assests/image/Performance/Vi.png"/>
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
@@ -108,7 +108,7 @@
                 <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me, Converter={StaticResource priceConverter}}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>
-                            <Image Source="assests/image/Performance/performance_Me.png"/>
+                            <Image Source="/assests/image/Performance/Me.png"/>
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                     <DataGridTextColumn.CellStyle>
@@ -170,11 +170,16 @@
 
         <StackPanel Grid.Row="3" Grid.Column="1" Margin="6">
             <Label Content="Perfromace 所需" />
-            <DataGrid x:Name="TotalList" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="30" RowHeight="30">
+            <DataGrid x:Name="TotalList" AutoGenerateColumns="False" CanUserAddRows="False" ColumnHeaderHeight="35" RowHeight="35" HorizontalGridLinesBrush="#FFB0D0F2" VerticalGridLinesBrush="#FFB0D0F2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="時間" IsReadOnly="True" Binding="{Binding Space}" Width="*" ElementStyle="{StaticResource CenterAlignmentStyle}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Da" IsReadOnly="True" Binding="{Binding Da}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                        <DataGridTextColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Image Source="/assests/image/Performance/Da.png"/>
+                            </DataTemplate>
+                        </DataGridTextColumn.HeaderTemplate>
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                                 <Setter Property="Background" Value="#c1fafe"/>
@@ -182,6 +187,11 @@
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Pa" IsReadOnly="True" Binding="{Binding Pa}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                        <DataGridTextColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Image Source="/assests/image/Performance/Pa.png"/>
+                            </DataTemplate>
+                        </DataGridTextColumn.HeaderTemplate>
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                                 <Setter Property="Background" Value="#eec7c6"/>
@@ -189,13 +199,23 @@
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Vo" IsReadOnly="True" Binding="{Binding Vo}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                        <DataGridTextColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Image Source="/assests/image/Performance/Vo.png"/>
+                            </DataTemplate>
+                        </DataGridTextColumn.HeaderTemplate>
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
-                                <Setter Property="Background" Value="#fef0c9"/>
+                                <Setter Property="Background" Value="#FFE4E1"/>
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Vi" IsReadOnly="True" Binding="{Binding Vi}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                        <DataGridTextColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Image Source="/assests/image/Performance/Vi.png"/>
+                            </DataTemplate>
+                        </DataGridTextColumn.HeaderTemplate>
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                                 <Setter Property="Background" Value="#FFF380"/>
@@ -203,6 +223,11 @@
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Me" IsReadOnly="True" Binding="{Binding Me}" Width="50" HeaderStyle="{StaticResource CenterGridHeaderStyle}" ElementStyle="{StaticResource CenterAlignmentStyle}">
+                        <DataGridTextColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Image Source="/assests/image/Performance/Me.png"/>
+                            </DataTemplate>
+                        </DataGridTextColumn.HeaderTemplate>
                         <DataGridTextColumn.CellStyle>
                             <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
                                 <Setter Property="Background" Value="#d2cde4"/>
