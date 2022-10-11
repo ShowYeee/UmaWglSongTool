@@ -24,6 +24,7 @@ using Newtonsoft.Json.Linq;
 using F23.StringSimilarity;
 using UmaWglSongTool.Utility;
 using System.Threading;
+using System.Security.Policy;
 
 namespace UmaWglSongTool
 {
@@ -298,19 +299,42 @@ namespace UmaWglSongTool
 
                 try
                 {
+                    #region 截圖 & 拿文字
                     string fileName = "tmp/Capture.jpg";
                     CaptureHelper capture = new CaptureHelper();
                     OcrHelper ocr = new OcrHelper();
                     capture.GetWindowCaptureByName(pName, fileName);
-                    string str = ocr.GetTextByImage(fileName).Replace("\n", "");
+                    string CaptureStr = ocr.GetTextByImage(fileName);
+                    var strList = CaptureStr.Split("\n");
+                    #endregion
 
+                    #region 辨識
+                    var items = new List<ListModel>();
                     var jw = new JaroWinkler();
-                    var item = _Datas.Where(x => jw.Similarity(str, $"「{x.Name}」の楽曲を習得の期待度が上がった") >= threshold).FirstOrDefault();
-                    if (item != null)
+                    var tmp = 0.00;
+                    var uId = -1;
+
+                    foreach(var row in _Datas)
                     {
-                        _Datas.SingleOrDefault(x => x.Id == item.Id).IsChecked = true;
-                        GridReload();
+                        foreach(string str in strList)
+                        {
+                            var score = jw.Similarity(str, $"「{row.Name}」の楽曲");
+                            if (score >= threshold)
+                            {
+                                if (score > tmp)
+                                {
+                                    uId = row.Id;
+                                    tmp = score;
+                                }
+                            }
+                        }         
                     }
+
+                    if (uId != -1)
+                        _Datas.SingleOrDefault(x => x.Id == uId).IsChecked = true;
+                    #endregion
+
+                    GridReload();
                     num++;
 
                     Action action = () => { CaptcureBtn.Content = $"擷取視窗 (scan: {num})"; };
